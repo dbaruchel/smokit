@@ -17,7 +17,7 @@
 
 # Ignore other unneeded files.
 /Gemfile
-database.yml
+#database.yml
 doc/
 *.swp
 *~
