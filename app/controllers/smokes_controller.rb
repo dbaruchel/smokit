@@ -10,6 +10,7 @@ class SmokesController < ApplicationController
   # GET /smokes/1
   # GET /smokes/1.json
   def show
+	@smoke = Smoke.find(params[:id])
   end
 
   # GET /smokes/new
