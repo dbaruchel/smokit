@@ -6,8 +6,7 @@ var titre=document.createElement('h1'),
     titreText=document.createTextNode(uName);
     titre.appendChild(titreText);
    // document.body.appendChild(titre); Met en dernier
-   document.body.insertBefore(titre,document.body.firstChild);
-  	
+   document.body.insertBefore(titre,document.body.firstChild);	
 var form=document.createElement('form'),
 	inputCreer=document.createElement('input');
 	
@@ -18,15 +17,9 @@ var form=document.createElement('form'),
 	inputCreer.onclick=resetStorage;		
 	form.appendChild(inputCreer);
 	document.body.appendChild(form);
-
-//Requete XMLHttpRequest en GET
-var xhr = getXMLHttpRequest();
-//Avant de passer des variables, faire
-//var sVar=encodeURIComponent("Contenu avec des espaces");
-xhr.open("GET","/users/2", true);
-xhr.send(null);
+	request(readData);
+	
 }
-
 else {
 	var form=document.createElement('form'),
 	label=document.createElement('label'),
@@ -88,4 +81,26 @@ function getXMLHttpRequest() {
 	}
 	return xhr;
 }
+
+//Requete XMLHttpRequest en GET
+function request(callback) {
+	var xhr = getXMLHttpRequest();
+
+	//Avant de passer des variables, faire
+	//var sVar=encodeURIComponent("Contenu avec des espaces");
+	xhr.onreadystatechange = function() {
+	    	if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+        	callback(xhr.responseText);
+    		}
+	};
+	var suName= encodeURIComponent(uName);
+	xhr.open("GET","/users/name/"+suName, true);
+	xhr.send(null);
+}
+
+function readData(sData) {
+	// On peut maintenant traiter les données sans encombrer l'objet XHR.
+	alert(sData);
+}
+
 
