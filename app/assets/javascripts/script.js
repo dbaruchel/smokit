@@ -1,6 +1,9 @@
 //prend ce qu'il y a dans le formulaire et l'envoie dans localStorage à l'id 'userName' Possibilité de trucs JSON
+
 var uName=localStorage.getItem('userName');
+
 //Si la variableuName est définie, on l'affiche en haut, sinon on affiche le formulaire
+
 if (uName!=null && uName!='') {
 var titre=document.createElement('h1'),
     titreText=document.createTextNode(uName);
@@ -47,6 +50,7 @@ else {
 }
 
 function getUserName() {
+	//prend la valeur du formulaire avec id=userName pour la mettre
 var userName = document.getElementById('userName').value;
 localStorage.setItem('userName', userName);
 
@@ -54,17 +58,17 @@ localStorage.setItem('userName', userName);
 //alert(userName);
 //var retrieved = localStorage.getItem('userName');
 //alert(retrieved);
-
 //console.log('retrieved: ', JSON.parse(retrieved)); Vu sur stackOverflow mais, A quoi ca sert ??
 }
 
 function resetStorage() {
+//pour remettre la variable à 0
 localStorage.clear();
 }
 
 function getXMLHttpRequest() {
+	//fonction qui créé l'objetXHR de la bonne manière suivant les navigateurs
 	var xhr = null;
-
 	if (window.XMLHttpRequest || window.ActiveXObject){
 		if (window.ActiveXObject) {
 			try {
@@ -99,8 +103,68 @@ function request(callback) {
 }
 
 function readData(sData) {
-	// On peut maintenant traiter les données sans encombrer l'objet XHR.
+	// On peut maintenant traiter les données sans encombrer l'objet XHR.	
+	//But, créer une table qui affiche tout bien
 	alert(sData);
+	sData=textToXML(sData);
+	var table = document.createElement('table'),
+	tr = document.createElement('tr'),
+	thDate= document.createElement('th'),
+	thLat= document.createElement('th'),
+	thLon= document.createElement('th'),
+	textD=document.createTextNode('Date'),
+	textLat=document.createTextNode('Latitude'),
+	textLon=document.createTextNode('Longitude'),
+
+	nodes = sData.getElementsByTagName('tr');
+	table.appendChild(tr);
+	tr.appendChild(thDate);
+	tr.appendChild(thLat);
+	tr.appendChild(thLon);
+	thDate.appendChild(textD);
+	thLat.appendChild(textLat);
+	thLon.appendChild(textLon);
+	document.body.appendChild(table);
+	var c=nodes.length
+	alert(nodes[0].tagName);
+	alert(c.toString());
+	for (var i=0; i<c; i++){
+		alert('Pouet'+i);
+		table.appendChild(nodes[i]);
+		
+	}
 }
+
+// Convert a string to XML Node Structure
+// Returns null on failure
+//Sert parce que la réponse est une string de HTML
+function textToXML ( text ) {
+      try {
+        var xml = null;
+
+        if ( window.DOMParser ) {
+
+          var parser = new DOMParser();
+          xml = parser.parseFromString( text, "text/xml" );
+
+          var found = xml.getElementsByTagName( "parsererror" );
+
+          if ( !found || !found.length || !found[ 0 ].childNodes.length ) {
+            return xml;
+          }
+
+          return null;
+        } else {
+
+          xml = new ActiveXObject( "Microsoft.XMLDOM" );
+
+          xml.async = false;
+          xml.loadXML( text );
+          return xml;
+        }
+      } catch ( e ) {
+        // suppress
+      }
+    }
 
 

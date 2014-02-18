@@ -1,21 +1,2 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <h1>Name:
-  <%= @user.name %></h1>
-</p>
-	<h2> Smokes: </h2>
-	
-	<table>
-		<tr>
-			<th>Date</th>
-			<th>Latitude</th>
-			<th>Longitude</th>
-		</tr>
 
 		<%= render @user.smokes %>
-	</table>
-	
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
