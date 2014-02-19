@@ -4,7 +4,7 @@ Smokit::Application.routes.draw do
  
   get "/users/name/:name", to: "users#display"
   resources :users
-  
+  #get "/json/users/name/:name", to: "users#display_json"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

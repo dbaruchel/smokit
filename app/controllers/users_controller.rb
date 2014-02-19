@@ -15,7 +15,14 @@ class UsersController < ApplicationController
   
   #GET /users/name
   def display
-  @user = User.find_by_name params[:name]
+ 	@user = User.find_by_name params[:name] 
+respond_to do |format|
+	 format.html
+	 #display.html.erb #format.json { render json: @user.smokes }
+	@name = @user.name 
+	@smokes = @user.smokes 
+	format.json { render :json => {:name => @name , :smokes => @smokes}}
+	end
   end
 
   # GET /users/new
@@ -31,7 +38,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -71,7 +77,7 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
-    end
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params

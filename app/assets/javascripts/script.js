@@ -1,5 +1,7 @@
+//setTimeout(function ...) utiliser jquery.ready
 //prend ce qu'il y a dans le formulaire et l'envoie dans localStorage à l'id 'userName' Possibilité de trucs JSON
-
+//console.log pour débugger dans chrome
+//puts "===" dans ruby 
 var uName=localStorage.getItem('userName');
 
 //Si la variableuName est définie, on l'affiche en haut, sinon on affiche le formulaire
@@ -9,7 +11,8 @@ var titre=document.createElement('h1'),
     titreText=document.createTextNode(uName);
     titre.appendChild(titreText);
    // document.body.appendChild(titre); Met en dernier
-   document.body.insertBefore(titre,document.body.firstChild);	
+   document.body.insertBefore(titre,document.body.firstChild);
+
 var form=document.createElement('form'),
 	inputCreer=document.createElement('input');
 	
@@ -98,15 +101,14 @@ function request(callback) {
     		}
 	};
 	var suName= encodeURIComponent(uName);
-	xhr.open("GET","/users/name/"+suName, true);
+	xhr.open("GET","/users/name/"+suName+".json", true);
 	xhr.send(null);
 }
 
 function readData(sData) {
 	// On peut maintenant traiter les données sans encombrer l'objet XHR.	
 	//But, créer une table qui affiche tout bien
-	alert(sData);
-	sData=textToXML(sData);
+	//sData=textToXML(sData);
 	var table = document.createElement('table'),
 	tr = document.createElement('tr'),
 	thDate= document.createElement('th'),
@@ -114,9 +116,9 @@ function readData(sData) {
 	thLon= document.createElement('th'),
 	textD=document.createTextNode('Date'),
 	textLat=document.createTextNode('Latitude'),
-	textLon=document.createTextNode('Longitude'),
+	textLon=document.createTextNode('Longitude');
+	
 
-	nodes = sData.getElementsByTagName('tr');
 	table.appendChild(tr);
 	tr.appendChild(thDate);
 	tr.appendChild(thLat);
@@ -125,14 +127,34 @@ function readData(sData) {
 	thLat.appendChild(textLat);
 	thLon.appendChild(textLon);
 	document.body.appendChild(table);
-	var c=nodes.length
-	alert(nodes[0].tagName);
-	alert(c.toString());
+
+	
+	console.log(sData);
+	
+	var hash = JSON.parse(sData);
+	var c=hash['smokes'].length;
+	console.log(hash['name']);
+	console.log(hash['smokes'].length);
 	for (var i=0; i<c; i++){
-		alert('Pouet'+i);
-		table.appendChild(nodes[i]);
-		
+	console.log(i);
+	var trB = document.createElement('tr'),
+	tDate= document.createElement('th'),
+	tLat= document.createElement('th'),
+	tLon= document.createElement('th'),
+	BDate = document.createTextNode(Date(hash['smokes'][i]['smoke_date'])),
+	BLat = document.createTextNode(hash['smokes'][i]['smoke_latitude']),
+	BLon = document.createTextNode(hash['smokes'][i]['smoke_longitude']);
+
+	trB.appendChild(tDate);
+	trB.appendChild(tLat);
+	trB.appendChild(tLon);
+	tDate.appendChild(BDate);
+	tLat.appendChild(BLat);
+	tLon.appendChild(BLon);
+	table.appendChild(trB);
 	}
+		
+
 }
 
 // Convert a string to XML Node Structure
@@ -157,7 +179,6 @@ function textToXML ( text ) {
         } else {
 
           xml = new ActiveXObject( "Microsoft.XMLDOM" );
-
           xml.async = false;
           xml.loadXML( text );
           return xml;
