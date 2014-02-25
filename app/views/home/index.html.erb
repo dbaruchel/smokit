@@ -15,9 +15,9 @@
 
 	<p> Pas encore Inscrit ? </p>
 	<h2>Nouveau Username :</h2>
-<form id="register">
-	<input type="text" name="newname">
-	<input type="submit" value="Soumettre">
+<form id="register" method="post" action="/users"><input name="authenticity_token" type="hidden" value="WE9L/lhK8otgTy/+UZd8jOjGYBnRMs2I37JUL3v3tjQ=" />
+	<input id="user_name" name="user[name]" type="text">
+	<input name="commit" type="submit" value="Soumettre">
 </form>
 
 <p> 
