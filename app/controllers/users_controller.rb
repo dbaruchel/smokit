@@ -43,7 +43,7 @@ respond_to do |format|
         format.html {redirect_to "/", notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to "/"}
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
