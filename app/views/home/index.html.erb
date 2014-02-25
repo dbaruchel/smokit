@@ -24,10 +24,21 @@
 	<a href="/users">Manage Users</a><br/>
 	<a href="/smokes">Manage Smokes</a>
 </p>
-
+	<h2>Imaginons la page username=Mika loggedIn=true</h2>
       <script src="/assets/script2.js">
-
       </script>
 
+<form id="new_smoke" method="post" action="/newsmoke">
+	<input name="authenticity_token" type="hidden" value="WE9L/lhK8otgTy/+UZd8jOjGYBnRMs2I37JUL3v3tjQ=" />
+	<input id="user_name" name="user[name]" type="hidden" value="Mika" />
+	<input id="smoke_lat" name="smoke[smoke_latitude]" type="hidden" value="1" />
+	<input id="smoke_long" name="smoke[smoke_longitude]" type="hidden" value="2" />
+	<input id="smoke_date" name="smoke[smoke_date]" type="hidden" value="2014-02-16T16:56:45.572Z" />
+
+	<input name="commit" type="submit" value="New Smoke">
+</form>
+
+<br/><br/>
   </body>
+	
 </html>

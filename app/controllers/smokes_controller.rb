@@ -26,7 +26,25 @@ class SmokesController < ApplicationController
   # POST /smokes.json
   def create
     @smoke = Smoke.new(smoke_params)
+	
+    respond_to do |format|
+      if @smoke.save
+        format.html { redirect_to @smoke, notice: 'Smoke was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @smoke }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @smoke.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
+  # POST zdzd/smokes
+  # POST zdz/smokes.json
+  def create2
+	@user = User.find_by_name [:user_name]
+	params[:user_id] = @user.id
+    	@smoke = Smoke.new(smoke_params)
+	
     respond_to do |format|
       if @smoke.save
         format.html { redirect_to @smoke, notice: 'Smoke was successfully created.' }
@@ -70,6 +88,6 @@ class SmokesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def smoke_params
-      params.require(:smoke).permit(:user_id, :smoke_date, :smoke_latitude, :smoke_longitude)
+      params.require(:smoke).permit(:user_name, :user_id, :smoke_date, :smoke_latitude, :smoke_longitude)
     end
 end

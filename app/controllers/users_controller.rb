@@ -44,6 +44,7 @@ respond_to do |format|
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { redirect_to "/"}
+	#render 'new'
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

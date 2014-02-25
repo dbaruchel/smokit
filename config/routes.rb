@@ -1,5 +1,6 @@
 Smokit::Application.routes.draw do
   get "home/index"
+  post "/newsmoke", to: "smokes#create2"
   resources :smokes
  
   get "/users/name/:name", to: "users#display"
