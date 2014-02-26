@@ -83,7 +83,7 @@ $(function(){
 				//Connection ratée... On affiche une animation pour le montrer au monsieur
 				console.log(textStatus);
 				console.log(errorThrown);
-alert("La connexion au server n'a pas réussi, mais tu vas quand même avoir le cancer.. LOL");
+			alert("La connexion au server n'a pas réussi, mais tu vas quand même avoir le cancer.. LOL");
 			}
 		});
 
@@ -91,6 +91,8 @@ alert("La connexion au server n'a pas réussi, mais tu vas quand même avoir le 
 
 	//Quand on clique sur le bouton go_smoke -> stats
 	$('#go_smoke_stats').click(function() {
+	//Remet à zéro les stats et affiche l'écran
+		$(".smoke_list").remove();
 		$(".connected").hide();
 		$(".stats").show();
 		$("#title_stats").text("Tes stats, "+username+" !");
@@ -105,11 +107,10 @@ alert("La connexion au server n'a pas réussi, mais tu vas quand même avoir le 
 			console.log(l);
 			//Parcours à refaire pour une meilleure présentation
 			$.each(donnees['smokes'],function(){
-				$("#stat_table").append("<tr><th>"+this.smoke_date+
+				$("#stat_table").append("<tr class='smoke_list'><th>"+this.smoke_date+
 				"</th><th>"+this.smoke_latitude+
 				"</th><th>"+this.smoke_longitude+
 				"</th></tr>");
-			
 			});
 
 		},
