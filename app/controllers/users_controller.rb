@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   #GET /users/name
   def display
  	@user = User.find_by_name params[:name] 
-respond_to do |format|
+	respond_to do |format|
 	 format.html
 	 #display.html.erb #format.json { render json: @user.smokes }
 	@name = @user.name 
@@ -39,10 +39,13 @@ respond_to do |format|
   def create
     @user = User.new(user_params)
     respond_to do |format|
-      if @user.save
+#Cette ligne permet de renvoyer une erreur à jquery si l'utilisateur existe déja
+      if (!User.exists?(@user) && @user.save)
+	#puts "=============================================="
         format.html {redirect_to "/", notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
+	#puts " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "
         format.html { redirect_to "/"}
 	#render 'new'
         format.json { render json: @user.errors, status: :unprocessable_entity }

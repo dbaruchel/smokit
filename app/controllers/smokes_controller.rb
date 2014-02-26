@@ -40,11 +40,13 @@ class SmokesController < ApplicationController
 
   # POST zdzd/smokes
   # POST zdz/smokes.json
-  def create2
-	@user = User.find_by_name [:user_name]
-	params[:user_id] = @user.id
-    	@smoke = Smoke.new(smoke_params)
-	
+
+def create2
+@userP = params[:user]
+@smokeP = params[:smoke]
+ 
+@user = User.find_by_name [@userP[:name]]
+@smoke = Smoke.new(user_id: @user.id, smoke_date: @smokeP[:smoke_date], smoke_latitude: @smokeP[:smoke_latitude], smoke_longitude: @smokeP[:smoke_longitude])
     respond_to do |format|
       if @smoke.save
         format.html { redirect_to @smoke, notice: 'Smoke was successfully created.' }
