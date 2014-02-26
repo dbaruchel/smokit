@@ -6,8 +6,7 @@
 
   <body>
 
-
-<!--Partie de code qui sera utilisé en non connecté-->
+<!--Partie de code qui sera utilisée en non connecté-->
 <div class='disconnected'>
 <p id="error1" style="display:none; color:red">Username non existant!</p>'	
 <p id="error2" type="hidden" style="display:none; color:red">Username déja pris!</p>
@@ -28,22 +27,27 @@
 	</p>
 </div>
 
-<!--Partie de code qui sera utilisé en connecté-->
+<!--Partie de code qui sera utilisée en connecté-->
 <div class='connected'>
-	<h2>Imaginons la page username=Mika loggedIn=true</h2>
-    	
-
-	<form id="new_smoke" method="post" action="/newsmoke">
-		<input name="authenticity_token" type="hidden" value="WE9L/lhK8otgTy/+UZd8jOjGYBnRMs2I37JUL3v3tjQ=" />
-		<input id="user_name" name="user[name]" type="hidden" value="Mikam" />
-		<input id="smoke_lat" name="smoke[smoke_latitude]" type="hidden" value="1" />
-		<input id="smoke_long" name="smoke[smoke_longitude]" type="hidden" value="2" />
-		<input id="smoke_date" name="smoke[smoke_date]" type="hidden" value="2014-02-16T16:56:45.572Z" />
-		<input name="commit" type="submit" value="New Smoke">
-	</form>
-
-<br/><br/>
+	<h2 id="title_smoke"></h2>
+<!--Beaucoup d'animations Jquery à faire la-->
+	<input id="smoke" type="submit" value="New Smoke">
+	<br/>
+	<input id="go_smoke_stats" type="submit" value="Voir l'évolution de ton cancer !">
 </div>
+
+<!--Partie de code qui sera utilisé en stats-->
+<div class='stats'>
+	<h2 id="title_stats"></h2>
+	<table id="stat_table">
+		<tr id="title_tr">
+			<th>Date</th>
+			<th>Latitude</th>
+			<th>Longitude</th>
+		</tr>
+	</table>
+<input id="go_stats_smoke" type="submit" value="Encore se rapprocher du cancer ?">
+</div>
+
 </body>
-	
 </html>
