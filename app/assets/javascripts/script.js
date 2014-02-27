@@ -1,9 +1,13 @@
-//Attend le chargement du DOM
-$(function(){
-	//Réglage de la page au début : déclaration variable globale et cachage de connecté et stats
+//Attend le chargement du DOM que ce soit en Ruby (page load)
+var ready = function(){
+	//Réglage de la page au début : déclaration variable globale et cachage de connecté et stats voir plus bas 
 	var username='';
 	$(".connected").hide();
 	$(".stats").hide();
+
+	//Réglage de ce qu'on accepte comme input grace au plugin jquery alphanum(). Evite création d'utilisateurs aux noms mauvais pour les requetes. A COMPLETER DANS LE BACKEND
+	$(".restricted_input").alphanum();
+
 
 	//Quand on clique sur le bouton d'id 'Connect'
 	$('#connect').click(function() {
@@ -129,4 +133,15 @@ $(function(){
 		$(".stats").hide();
 		$("#title_stats").text("Tes stats, "+username+" !");
 	});
-});
+
+	//Quand on clique sur le bouton go_smoke->home
+	$('#go_smoke_home').click(function() {
+		username='';
+		$(".disconnected").show();
+		$(".connected").hide();
+	});
+};
+
+//Vérifie si le reload de la page provient de rails, ou est normal, pour bien gérer le reload du javascript sur la page home
+$(document).ready(ready);
+$(document).on('page:load', ready);

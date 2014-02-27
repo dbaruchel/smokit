@@ -12,14 +12,15 @@
 <p id="error2" type="hidden" style="display:none; color:red">Username déja pris!</p>
 	<h1>Smokit, la partie Web</h1>
 	<h2 id="title">Username :</h2>
-		<input id="username_connect" type="text">
+		<input class="restricted_input" id="username_connect" type="text">
 		<input id="connect" type="submit" value="Connection">
+
 	<br/><br/>
 
 	<p> Pas encore Inscrit ? </p>
 	<h2>Nouveau Username :</h2>
 
-		<input id="username_create" type="text">
+		<input class="restricted_input" id="username_create" type="text">
 		<input id="create" type="submit" value="Soumettre">
 	<p> 
 		<a href="/users">Manage Users</a><br/>
@@ -34,6 +35,7 @@
 	<input id="smoke" type="submit" value="New Smoke">
 	<br/>
 	<input id="go_smoke_stats" type="submit" value="Voir l'évolution de ton cancer !">
+	<p><a id="go_smoke_home">Se déconnecter</a></p>
 </div>
 
 <!--Partie de code qui sera utilisé en stats-->
