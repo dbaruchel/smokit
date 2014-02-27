@@ -1,7 +1,7 @@
 //Attend le chargement du DOM que ce soit en Ruby (page load)
+	var username='';
 var ready = function(){
 	//Réglage de la page au début : déclaration variable globale et cachage de connecté et stats voir plus bas 
-	var username='';
 	$(".connected").hide();
 	$(".stats").hide();
 
@@ -19,20 +19,10 @@ var ready = function(){
 			dataType: "json",
 			type: "get",
 			success: function(donnees){
-				//Connection réussie ! Ici on va écrire les modifications pour passer de non connecté à connecté dans le DOM
-
-				$(".connected").show();
-				$(".disconnected").hide();
-				$("#title_smoke").text("Smok'it, "+username+" !");
-				//var l = donnees['smokes'].length;
-				//console.log(l);
+				Connection_success(donnees);
 			},
 			error: function(xhr,textStatus,errorThrown){
-				//Connection ratée... On rajoute l'erreur dans le DOM
-				console.log(textStatus);
-				console.log(errorThrown);
-				$('#error1').show();
-				$('#username_connect').css("border-color","red");
+				Connection_failure(textStatus,errorThrown,false);
 			}
 		});
 
@@ -50,16 +40,10 @@ var ready = function(){
 			data: {"authenticity_token":"WE9L/lhK8otgTy/+UZd8jOjGYBnRMs2I37JUL3v3tjQ=", "user[name]":username},
 			success: function(donnees){
 				//Création réussie ! Ici on va écrire les modifications pour passer de non connecté à connecté dans le DOM
-				$(".connected").show();
-				$(".disconnected").hide();
-				$("#title_smoke").text("Smok'it, "+username+" !");
+				Connection_success(donnees);
 			},
 			error: function(xhr,textStatus,errorThrown){
-				//Connection ratée... On rajoute l'erreur dans le DOM
-				console.log(textStatus);
-				console.log(errorThrown);
-				$('#error2').show();
-				$('#username_create').css("border-color","red");
+				Connection_failure(textStatus, errorThrown, true)
 			}
 		});
 
@@ -80,14 +64,10 @@ var ready = function(){
 				"smoke[smoke_date]":new Date()
 			},
 			success: function(donnees){
-				//Smoke réussie ! On affiche l'animation pour le montrer au monsieur
-			alert('Smoke créée...       Tu as perdu 1min de ton espérance de vie et 0.3€, champion!');
+				Smoke_success(donnees);
 			},
 			error: function(xhr,textStatus,errorThrown){
-				//Connection ratée... On affiche une animation pour le montrer au monsieur
-				console.log(textStatus);
-				console.log(errorThrown);
-			alert("La connexion au server n'a pas réussi, mais tu vas quand même avoir le cancer.. LOL");
+				Smoke_failure(textStatus,errorThrown);
 			}
 		});
 
@@ -145,3 +125,39 @@ var ready = function(){
 //Vérifie si le reload de la page provient de rails, ou est normal, pour bien gérer le reload du javascript sur la page home
 $(document).ready(ready);
 $(document).on('page:load', ready);
+
+
+//Les différentes fonctions si requete réussies ou ratées pour différencier les requetes et les modifs dy code client et serveur
+
+var Connection_success = function($donnees) {
+	//Connection réussie ! Ici on va écrire les modifications pour passer de non connecté à connecté dans le DOM
+		$(".connected").show();
+		$(".disconnected").hide();
+		$("#title_smoke").text("Smok'it, "+username+" !");
+};
+var Connection_failure = function($textStatus,$errorThrown,$creation) {
+	//Connection ou création ratée, on affiche un message d'erreur
+	console.log($textStatus);
+	console.log($errorThrown);
+	if ($creation) {
+		$('#error2').show();
+		$('#username_create').css("border-color","red");
+	}
+	else {
+		$('#error1').show();
+		$('#username_connect').css("border-color","red");	
+	}
+};
+
+var Smoke_success = function($donnees) {
+	//Création de smoke réussie, petite animation
+	alert('Smoke créée... !');
+};
+
+var Smoke_failure = function($textStatus, $errorThrown) {
+	//Création de smoke ratée, message d'erreur !
+	console.log(textStatus);
+	console.log(errorThrown);
+	alert("La connexion au server n'a pas réussi, réessaie !");
+};
+
