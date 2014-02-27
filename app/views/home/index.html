@@ -7,7 +7,7 @@
   <body>
 
 <!--Partie de code qui sera utilisée en non connecté-->
-<div class='disconnected'>
+<div class='disconnected' style="display:none">
 <p id="error1" style="display:none; color:red">Username non existant!</p>	
 <p id="error2" type="hidden" style="display:none; color:red">Username déja pris!</p>
 	<h1>Smokit, la partie Web</h1>
@@ -29,7 +29,7 @@
 </div>
 
 <!--Partie de code qui sera utilisée en connecté-->
-<div class='connected'>
+<div class='connected' style="display:none">
 	<h2 id="title_smoke"></h2>
 <!--Beaucoup d'animations Jquery à faire la-->
 	<input id="smoke" type="submit" value="New Smoke">
@@ -39,7 +39,7 @@
 </div>
 
 <!--Partie de code qui sera utilisé en stats-->
-<div class='stats'>
+<div class='stats' style="display:none">
 	<h2 id="title_stats"></h2>
 	<table id="stat_table">
 		<tr id="title_tr">
