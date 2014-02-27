@@ -19,8 +19,16 @@ body {
     background-image:url('fond app.jpg');
   }
 
-  connect { bottom: 100px;
+  #connect { 
+    position: relative;
+    top: 0.35em;
+    left: -0.4em;
+  }
 
+  #create { 
+    position: relative;
+    top: 0.3em;
+    left: -0.4em;
   }
 
   h1 {

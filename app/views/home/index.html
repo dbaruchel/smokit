@@ -10,18 +10,19 @@
 <div class='disconnected'>
 <p id="error1" style="display:none; color:red">Username non existant!</p>	
 <p id="error2" type="hidden" style="display:none; color:red">Username déja pris!</p>
-	<h1>Smokit, la partie Web</h1>
+	<h1>Hold it !</h1>
 	<h2 id="title">Username :</h2>
 		<input id="username_connect" type="text">
 	    <!-- <input id="connect" type="submit" value="Connection"> -->
-	    <input id="connect" src="/assets/bouton clope.png" width="3%" height="3%" type=image>
+	    <img id="connect" src="/assets/orange ok.jpg" height="19em">
 	<br/><br/>
 
-	<p> Pas encore Inscrit ? </p>
-	<h2>Nouveau Username :</h2>
+	<p> Not registered yet ? </p>
+	<h2>New User :</h2>
 
 		<input id="username_create" type="text">
-		<input id="create" type="submit" value="Soumettre">
+		<!-- <input id="create" type="submit" value="Soumettre"> -->
+		<img id="create" src="/assets/orange ok.jpg" height="19em">
 	<p> 
 		<a href="/users">Manage Users</a><br/>
 		<a href="/smokes">Manage Smokes</a>
@@ -34,7 +35,7 @@
 <!--Beaucoup d'animations Jquery à faire la-->
 	<input id="smoke" type="submit" value="New Smoke">
 	<br/>
-	<input id="go_smoke_stats" type="submit" value="Voir l'évolution de ton cancer !">
+	<input id="go_smoke_stats" type="submit" value="My Stats !">
 </div>
 
 <!--Partie de code qui sera utilisé en stats-->
@@ -47,7 +48,7 @@
 			<th>Longitude</th>
 		</tr>
 	</table>
-<input id="go_stats_smoke" type="submit" value="Encore se rapprocher du cancer ?">
+<input id="go_stats_smoke" type="submit" value="Retour cigarettes">
 </div>
 
 </body>
