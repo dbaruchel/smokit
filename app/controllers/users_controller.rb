@@ -41,6 +41,10 @@ class UsersController < ApplicationController
     respond_to do |format|
 #Cette ligne permet de renvoyer une erreur à jquery si l'utilisateur existe déja
       if (!User.exists?(@user) && @user.save)
+	remember_token = User.new_remember_token
+    	cookies.permanent[:remember_token] = remember_token
+	cookies.permanent[:username] = params[:name]
+    	@user.update_attribute(:remember_token, User.encrypt(remember_token))
 	#puts "=============================================="
         format.html {redirect_to "/", notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }

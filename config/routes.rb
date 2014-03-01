@@ -5,6 +5,10 @@ Smokit::Application.routes.draw do
  
   get "/users/name/:name", to: "users#display"
   resources :users
+
+resources :sessions, only: [:new, :create, :destroy]
+get '/signin', to: 'sessions#new'
+delete '/signout', to: 'sessions#destroy'
   #get "/json/users/name/:name", to: "users#display_json"
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,18 +1,25 @@
-//Attend le chargement du DOM que ce soit en Ruby (page load)
-var username='';
+//Attend le chargement du DOM que ce soit en Ruby (page load) et regarde les cookies ATTENTION LE COOKIE avec token propre crypté etc... n'est PAS IMPLEMENTE
+
+var username=''
+
 
 //Execute après le chargement du DOM
 var ready = function(){
 
+if($.cookie('username')!=null){
+//Si on est déja connecté, on triche (haha)
+	Connect(true);
+}
+else {
 //Accueil
 	$(".disconnected").show();
-
+}
 //Réglage de ce qu'on accepte comme input grace au plugin jquery alphanum(). Evite création d'utilisateurs aux noms mauvais pour les requetes. A COMPLETER DANS LE BACKEND
 	$(".restricted_input").alphanum();
 
 //Quand on clique sur le bouton d'id 'Connect'
 	$('#connect').click(function() {
-		Connect();
+		Connect(false);
 	});
 
 //Quand on clique sur le bouton d'id 'Nouvel utilisateur'

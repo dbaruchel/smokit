@@ -1,15 +1,24 @@
 //Fichiers dépendant des repositories, car les url de requetes et les headers dépendent de si on est sur l'app/ en local/vers heroku...
 
 
-//Var connection
-var Connect =function() {
-	//On prend la variable username dans l'input "Connect"
+//Var connection avec COOKIESSS CONNECTES (très mauvais cookies mais bon)...
+
+var Connect =function($deja_connect) {
+	//On prend la variable username dans l'input "Connect" si on est pas déja connecté
+	if ($deja_connect==true) {
+	username=$.cookie('username');
+	}
+	else
+	{
 	username=$('#username_connect').val();
-	//on fait la requete GET correspondante
+	}
+	//on fait la requete POST à Sessions correspondante
 	$.ajax({
-		url: "/users/name/"+username+".json",
-		dataType: "json",
-		type: "get",
+		url: "/sessions",
+		data: {"authenticity_token":"WE9L/lhK8otgTy/+UZd8jOjGYBnRMs2I37JUL3v3tjQ=",
+			"session[name]":username
+		},
+		type: "post",
 		success: function(donnees){
 			Connection_success(donnees);
 		},
@@ -18,7 +27,6 @@ var Connect =function() {
 		}
 	});
 };
-
 //Connection création
 var Create = function() {
 	//On prend la variable username dans l'input de texte "Nouvel util"
@@ -44,10 +52,10 @@ var Stats = function() {
 	$(".smoke_list").remove();
 	$(".connected").hide();
 	$(".stats").show();
-	$("#title_stats").text("Tes stats, "+username+" !");
+	$("#title_stats").text("Tes stats, "+$.cookie('username')+" !");
 	//requete ajax pour  remplir le tableau joli !
 	$.ajax({
-	url: "/users/name/"+username+".json",
+	url: "/users/name/"+$.cookie('username')+".json",
 	dataType: "json",
 	type: "get",
 	success: function(donnees){
@@ -69,7 +77,7 @@ var Smoke = function() {
 		type: "post",
 		dataType: "json",
 		data: {"authenticity_token":"WE9L/lhK8otgTy/+UZd8jOjGYBnRMs2I37JUL3v3tjQ=",
-			"user[name]":username,
+			"user[name]":$.cookie('username'),
 			"smoke[smoke_latitude]":1,
 			"smoke[smoke_longitude]":2,
 			"smoke[smoke_date]":new Date()
