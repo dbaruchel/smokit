@@ -67,7 +67,6 @@ var go_stats_smoke = function() {
 var go_smoke_home = function() {
 		username='';
 	//Reset des cookies 
-alert('J essaie deffacer');
 		$.cookie('username', null);
 		$.cookie('remember_token', null);
 		$(".disconnected").show();
