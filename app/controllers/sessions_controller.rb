@@ -2,16 +2,18 @@ class SessionsController < ApplicationController
 
 def create
 	user= User.find_by(name: params[:session][:name])
-	if user	
+	if User.exists?(user)	
 	remember_token = User.new_remember_token
     	cookies.permanent[:remember_token] = remember_token
 	cookies.permanent[:username] = user.name
     	user.update_attribute(:remember_token, User.encrypt(remember_token))
     	##self.current_user = user
-	redirect_to "/"  
+	redirect_to "/" 
+	puts "=========== "
 	else
-	flash.now[:error] = 'Nom d utilisateur existant'
-	redirect_to "/"
+	#Grosse tricherie ici pour faire bugger rails pour que la reponse ajax ait des headers d'erreur et fasse bien apparaitre l'erreur comme on le souhaite !
+	#La ligne suivante bug donc, sans que je sache pourquoi héhé
+	render status: :unprocessable_entity
 	end
 end
 

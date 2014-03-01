@@ -38,6 +38,7 @@ var Create = function() {
 		dataType: "json",
 		data: {"authenticity_token":"WE9L/lhK8otgTy/+UZd8jOjGYBnRMs2I37JUL3v3tjQ=", "user[name]":username},
 		success: function(donnees){
+
 			Connection_success(donnees);
 		},
 		error: function(xhr,textStatus,errorThrown){

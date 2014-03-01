@@ -1,13 +1,13 @@
-//Attend le chargement du DOM que ce soit en Ruby (page load) et regarde les cookies ATTENTION LE COOKIE avec token propre crypté etc... n'est PAS IMPLEMENTE
+//Attend le chargement du DOM que ce soit en Ruby (page load) et regarde les cookies ATTENTION LE COOKIE avec token propre crypté etc... n'est PAS IMPLEMENTE, et de meme pour _smokit_session ??? no idea de ce qu'est ce cookie la
 
-var username=''
+var username='';
 
 
 //Execute après le chargement du DOM
 var ready = function(){
 
-if($.cookie('username')!=null){
-//Si on est déja connecté, on triche (haha)
+if($.cookie('username')!='null'){
+//Si on est déja connecté, on triche (haha) deja_connect=true
 	Connect(true);
 }
 else {
@@ -17,7 +17,7 @@ else {
 //Réglage de ce qu'on accepte comme input grace au plugin jquery alphanum(). Evite création d'utilisateurs aux noms mauvais pour les requetes. A COMPLETER DANS LE BACKEND
 	$(".restricted_input").alphanum();
 
-//Quand on clique sur le bouton d'id 'Connect'
+//Quand on clique sur le bouton d'id 'Connect' deja_connect=false
 	$('#connect').click(function() {
 		Connect(false);
 	});

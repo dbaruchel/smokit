@@ -43,7 +43,7 @@ class UsersController < ApplicationController
       if (!User.exists?(@user) && @user.save)
 	remember_token = User.new_remember_token
     	cookies.permanent[:remember_token] = remember_token
-	cookies.permanent[:username] = params[:name]
+	cookies.permanent[:username] = @user.name
     	@user.update_attribute(:remember_token, User.encrypt(remember_token))
 	#puts "=============================================="
         format.html {redirect_to "/", notice: 'User was successfully created.' }
